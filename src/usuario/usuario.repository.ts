@@ -11,4 +11,8 @@ export class UsuarioRepository {
     async list () {
         return this.list_usuarios
     }
+    async isExists (email : string) {
+        const usuario_ok = this.list_usuarios.find( usuario => usuario.email === email);
+        return usuario_ok !== undefined;
+    }
 }

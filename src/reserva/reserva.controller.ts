@@ -6,7 +6,7 @@ import reservaDTO from './dto/reserva.dto';
 export default class ReservaController {
   constructor(private reserva_repository: ReservaRepository) {}
   @Post()
-  async create_reserva(@Body() dados : reservaDTO) {
+  async create_reserva(@Body() dados: reservaDTO) {
     this.reserva_repository.create(dados);
     return dados;
   }

@@ -1,11 +1,12 @@
 import { IsEmail, IsNotEmpty, IsBoolean } from 'class-validator';
+import { UniqueEmail } from '../validation/unique_email.validator';
 
 export class usuarioDTO {
   @IsNotEmpty()
   nome: string;
 
-  @IsNotEmpty()
   @IsEmail()
+  @UniqueEmail({ message: 'Já existe um email cadastrado' })
   email: string;
 
   @IsNotEmpty()
