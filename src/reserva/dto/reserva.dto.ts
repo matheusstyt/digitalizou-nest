@@ -1,4 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
+import { VerificarHorario } from '../validation/unique_horario.validator';
+import { HorarioPermitido } from '../validation/fora_funcionamento.validator';
 
 export default class reservaDTO {
   @IsNotEmpty()
@@ -8,8 +10,10 @@ export default class reservaDTO {
   cliente_name: string;
 
   @IsNotEmpty()
-  horario_entrada: string;
+  tempo: string;
 
   @IsNotEmpty()
-  tempo: string;
+  @VerificarHorario({ message: 'Já existe reserva nesse horário, nessa mesa' })
+  @HorarioPermitido({ message: 'Fora do funcionamento do estabelecimento' })
+  horario_entrada: string;
 }
