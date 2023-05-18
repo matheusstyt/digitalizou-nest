@@ -10,9 +10,24 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     UsuarioModule, 
     ReservaModule, 
-    TypeOrmModule.forRootAsync({
-      useClass : DBConfigService,
-      inject: [DBConfigService]
+    // sqlite3
+    // TypeOrmModule.forRoot({
+    //   type: 'sqlite',
+    //   database: './db/restaurante.db',
+    //   entities: [__dirname + '/**/*.entity{.js,.ts}'],
+    //   synchronize: true,
+    // }),
+
+    //mysql 
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3303,
+      username: 'root',
+      password: 'usbw',
+      database: 'teste',
+      autoLoadEntities: true,
+      synchronize: true,
     }),
     ConfigModule.forRoot({
       isGlobal : true

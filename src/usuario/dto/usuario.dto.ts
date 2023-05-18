@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsBoolean } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 import { UniqueEmail } from '../validation/unique_email.validator';
 
 export class usuarioDTO {
@@ -12,6 +12,6 @@ export class usuarioDTO {
   @IsNotEmpty()
   senha: string;
 
-  @IsBoolean()
-  administrador: boolean;
+  @IsNotEmpty()
+  administrador: string;
 }
