@@ -1,8 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common/decorators';
+import { InjectRepository } from '@nestjs/typeorm';
 import { ReservaEntity } from './reserva.entity';
-
+import { Repository } from 'typeorm';
 @Injectable()
-export default class ReservaRepository {
+export class ReservaServices {
+  constructor(
+    @InjectRepository(ReservaEntity)
+    private reservaRepository: Repository<ReservaEntity>,
+  ) {}
+  async create_reserva(reservaEntity: ReservaEntity) {
+    await this.reservaRepository.save(reservaEntity);
+  }
+  async list_reserva() {
+    const reserva_query = await this.reservaRepository.find();
+    return reserva_query;
+  }
   isValid(value: string): boolean {
     const data_atual = new Date(value);
     const hora_atual = data_atual.getHours();
@@ -19,25 +31,15 @@ export default class ReservaRepository {
         (hora_atual === hora_maxima && hora_atual <= minuto_maximo))
     );
   }
-  private list_revervas: ReservaEntity[] = [];
-
-  async create(reserva) {
-    this.list_revervas.push(reserva);
-  }
-
-  async list() {
-    return this.list_revervas;
-  }
   async isExists(horario: string, tempo: string, mesa: string) {
     // cálculo do horário de saída da reserva em questão
-    console.log(horario)
     const horario_entrada_request = new Date(horario);
     const horario_saida_request = new Date(
       horario_entrada_request.getTime() + this.parseTempo(tempo),
     );
 
     // loop para localizar a mesa em questão e verificar o horário
-    const temReserva = await this.list_revervas.find((reserva) => {
+    const temReserva = (await this.list_reserva()).find((reserva) => {
       if (reserva.mesa === mesa) {
         const horario_entrada__loop = new Date(reserva.horario_entrada);
         const tempo_loop = this.parseTempo(reserva.tempo);
@@ -53,7 +55,7 @@ export default class ReservaRepository {
         );
       }
     });
-    console.log(temReserva);
+
     return temReserva;
   }
   parseTempo(tempo: string): number {

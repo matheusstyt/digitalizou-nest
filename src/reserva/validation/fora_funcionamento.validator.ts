@@ -7,6 +7,7 @@ import {
 } from 'class-validator';
 import ReservaRepository from '../reserva.repository';
 import { Inject } from '@nestjs/common';
+import { ReservaServices } from '../reserva.services';
 @ValidatorConstraint({ async: true })
 export class ForaFuncionamentoValidator
   implements ValidatorConstraintInterface
@@ -14,9 +15,10 @@ export class ForaFuncionamentoValidator
   constructor(
     @Inject(ReservaRepository)
     private readonly reservaRepository: ReservaRepository,
+    private readonly reservaServices: ReservaServices,
   ) {}
   async validate(value: any): Promise<boolean> {
-    const isValid = this.reservaRepository.isValid(value);
+    const isValid = this.reservaServices.isValid(value);
     console.log(isValid);
     return !isValid;
   }

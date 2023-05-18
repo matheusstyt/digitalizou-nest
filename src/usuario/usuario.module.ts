@@ -9,7 +9,11 @@ import { TypeOrmModule} from '@nestjs/typeorm';
 @Module({
     imports : [TypeOrmModule.forFeature([UsuarioEntity])],
     controllers : [UsuarioController],
-    providers : [UsuarioRepository, UsuarioServices, UniqueEmailValidator],
+    providers : [
+        UsuarioRepository, 
+        UsuarioServices, 
+        UniqueEmailValidator
+    ],
 })
 export  class UsuarioModule {
 

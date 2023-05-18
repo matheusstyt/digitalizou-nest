@@ -17,7 +17,6 @@ export class UsuarioServices {
     const usuarios_query = await this.usuarioRepository.find();
     return usuarios_query;
   }
-
   async isExists(email: string) {
     const usuario_ok = (await this.list_usuario()).find(
       (usuario) => usuario.email === email,
