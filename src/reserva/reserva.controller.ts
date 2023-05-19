@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import ReservaRepository from './reserva.repository';
 import reservaDTO from './dto/reserva.dto';
 import { ReservaEntity } from './reserva.entity';
@@ -23,5 +23,9 @@ export default class ReservaController {
   async list_reservas() {
     const lista_reservas = await this.reserva_services.list_reserva();
     return lista_reservas;
+  }
+  @Delete('/:id')
+  async delete_reserva(@Param('id') id: number) {
+    await this.reserva_services.delete_reserva(id);
   }
 }

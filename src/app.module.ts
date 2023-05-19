@@ -5,6 +5,8 @@ import ReservaModule from './reserva/reserva.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DBConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [
@@ -33,5 +35,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal : true
     }),
 ],
+  controllers: [AuthController],
+  providers: [AuthService],
 })
 export class AppModule {}

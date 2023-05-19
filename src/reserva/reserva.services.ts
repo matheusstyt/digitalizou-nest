@@ -15,6 +15,9 @@ export class ReservaServices {
     const reserva_query = await this.reservaRepository.find();
     return reserva_query;
   }
+  async delete_reserva(id: number){
+    await this.reservaRepository.delete(id);
+  }
   isValid(value: string): boolean {
     const data_atual = new Date(value);
     const hora_atual = data_atual.getHours();
@@ -40,6 +43,7 @@ export class ReservaServices {
 
     // loop para localizar a mesa em questão e verificar o horário
     const temReserva = (await this.list_reserva()).find((reserva) => {
+      console.log(reserva);
       if (reserva.mesa === mesa) {
         const horario_entrada__loop = new Date(reserva.horario_entrada);
         const tempo_loop = this.parseTempo(reserva.tempo);

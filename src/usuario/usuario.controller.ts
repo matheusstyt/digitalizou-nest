@@ -5,6 +5,7 @@ import { usuarioDTO } from './dto/usuario.dto';
 import { UsuarioEntity } from './usuario.entity';
 import { ListaUsuarioDTO } from './dto/lista_usuarioDTO';
 import { UsuarioServices } from './usuario.services';
+
 @Controller('/usuarios')
 export class UsuarioController {
     

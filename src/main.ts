@@ -12,7 +12,7 @@ async function bootstrap() {
     }),
   );
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
-
+  app.enableCors(); // cors ativado
   await app.listen(8000);
 }
 bootstrap();
