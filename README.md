@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Framework escolhido, para desenvolver o back end da aplicação "restaurante-digitalizou".
 
 ## Installation
 
