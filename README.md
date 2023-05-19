@@ -26,6 +26,9 @@
 
 Framework escolhido, para desenvolver o back end da aplicação "restaurante-digitalizou".
 
+## Lembrando :
+Configure o arquivo .env para apontar o banco de dados.
+
 ## Installation
 
 ```bash
